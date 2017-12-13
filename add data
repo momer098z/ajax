@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<!-- هنا ساقوم باستدعاء مكتبة جي كويري حتى اتمكن من استقبال البيانات من النموذج باستخدام اكواد جي كويري التي سترونا الان باذن الله -->
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+        $('#btn').click(function (){ // اخذنا اسم الاي دي الخاص بالزر ووضعناه بهذا الشكل الذي امامكم 
+									// وقمنا باستدعاء دالة كليك وهي خاصة بالحدث الذي سيحدث على الزر عند الضغط عليه
+		   var name_ex  = $('#name1').val(); // اشارة السلم وهي عبارة عن وصف الاي دي في تاج html 
+		   var name_yx  = $('#name2').val();
+		   // الان سنقوم بكتابة كود اجاكس لقد اعددته قبل الدرس 
+		    $.ajax({
+			url : 'ajax.php' , // هنا نكتب الرابط الذي سنحول عليه البيانات من النموذج والرابط يستدعي دائما صفحة php 
+      	    type: 'POST', //  هنا نوع ارسال البيانات post or get 
+            data:{random:Math.random() , 
+			   // ناخذ القيمة التي اشرت اليها بصفحة php  ونضعها هنا 
+			   
+			   name1 : name_ex  , // الاسم الي على اليسار هو الاسم نفسه في صفحة php 
+			   name2 : name_yx   // الاسم الى على اليمين النقطتين فوق بعض هو نفس الاسم في اول كود جي كويري كما اشرت
+			   
+			   // هنا مررت القيمة الاولى هذه للقيمة الموجود في صفحة php  هذه  والثانية نفس الكلام اعتقد سهل !! 
+			   
+			 } , // هنا سنمرر المتغيرات بالاعلى حتى ترحل قيمها الى php 
+            success:function(data) //  هنا بعد الحدث نكتب ما اذا نجحت العملية او فشلت عن طريق التنبيهات alert
+             {
+				 // هنا نقوم بكتابة تنبيه للتاكد ان البيانات وصلت الى قاعدة البيانات لاحظو معي 
+				 // البراميتر الي اسمو data  هو عبارة عن متغير يستقبل البيانات المطبوعة في جملة في صفحة php 
+				 if(data == 1)
+				  {alert('تمت عملية الادخال بنجاح');}
+				  else {alert('فشلت العملية');}
+             }
+		 });
+		   
+		   
+		   
+		   
+		});                             // لو كان في تاج html  هكذا  class = 'name1'  نقوم بكتابة الكود هكذا  
+		
+    });
+</script>
+</head>
+
+<body>
+<!--   هنا ساقوم بكتابة كود النموذج (Form )-->
+
+<label> الاسم الاول 
+<input type="text" id="name1" name="name1" class="tt" /></label>
+<br />
+<label> الاسم الثاني 
+<input type="text" id="name2" name="name2"  /></label>
+<br />
+<input type="button" id="btn" value="ادخل البيانات" />
+</body>
+</html>
