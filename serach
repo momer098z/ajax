@@ -1,0 +1,23 @@
+<?php
+include_once("config.php");
+    if(isset($_GET["id"])){
+        $email=$_GET["id"];
+        if(empty($email)){
+            echo"error in empty";
+        }else{
+            $search=mysqli_query($conn,"SELECT email FROM students_acount WHERE email='$email'");
+            if (mysqli_num_rows($search) != 1){
+            echo"erro we canont find this user";
+            }else{
+$search_info=mysqli_query ($conn,"SELECT * FROM students_acount WHERE 
+email='$email'");
+$user_info=mysqli_fetch_assoc($search_info);
+   $_POST['email']=$user_info['email'];
+$_POST['username']=$user_info['username'];
+   echo $_POST['email'];
+  echo $_POST['username'];
+
+            }
+        }
+    }
+?>
